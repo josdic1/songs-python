@@ -78,6 +78,8 @@ class Song:
         from lib.song_tag import SongTag
         SongTag.add_new(self.id, tag_id)
 
+    def get_tags(self):
+        pass
         
     
     def update(self):
