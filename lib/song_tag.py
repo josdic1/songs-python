@@ -31,6 +31,7 @@ class SongTag:
             self._tag_id = value
         else:
             raise ValueError("tag_id is invalid")
+        
     
     @classmethod
     def _from_db_row(cls, row):
@@ -46,25 +47,13 @@ class SongTag:
             return cls._from_db_row(row)
         else:
             return None
-    
+        
     @classmethod
-    def find_by_song_id(cls, song_id):
-        CURSOR.execute("SELECT * FROM song_tags WHERE song_id = ?", (song_id,))
-        row = CURSOR.fetchone()
-        if row:
-            return cls._from_db_row(row)
-        else:
-            return None
-    
-    @classmethod
-    def find_by_song_id(cls, tag_id):
-        CURSOR.execute("SELECT * FROM song_tags WHERE tag_id = ?", (tag_id,))
-        row = CURSOR.fetchone()
-        if row:
-            return cls._from_db_row(row)
-        else:
-            return None
-    
+    def find_by_song_and_tag_ids(cls, song_id, tag_id):
+        CURSOR.execute("SELECT * FROM song_tags WHERE song_id = ? AND tag_id = ?", (song_id, tag_id,))
+        rows = CURSOR.fetchall()
+        return [cls._from_db_row(row) for row in rows] if rows else []
+
     @classmethod
     def get_all(cls):
         CURSOR.execute("SELECT * FROM song_tags")
@@ -72,8 +61,8 @@ class SongTag:
         return [cls._from_db_row(row) for row in rows] if rows else []
     
     @classmethod
-    def add_new(cls, song_id, tag_id, id):
-        exisitng = cls.find_by_id(id)
+    def add_new(cls, song_id, tag_id):
+        exisitng = cls.find_by_song_and_tag_ids(song_id, tag_id)
         if exisitng:
             return exisitng
         song_tag = cls(song_id, tag_id)

@@ -1,7 +1,7 @@
-
+from lib.song import Song
 
 def run():
-    pass
+    print(Song.get_all())
 
 
 if __name__ == "__main__":
