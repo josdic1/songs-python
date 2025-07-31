@@ -47,6 +47,21 @@ class SongTag:
             return cls._from_db_row(row)
         else:
             return None
+
+    @classmethod
+    def find_by_song_id(cls, song_id):
+        CURSOR.execute("SELECT * FROM song_tags WHERE song_id = ?", (song_id,))
+        rows = CURSOR.fetchall()
+        return [cls._from_db_row(row) for row in rows] if rows else []
+
+    @classmethod
+    def find_by_tag_id(cls, tag_id):
+        CURSOR.execute("SELECT * FROM song_tags WHERE tag_id = ?", (tag_id,))
+        row = CURSOR.fetchone()
+        if row:
+            return cls._from_db_row(row)
+        else:
+            return None
         
     @classmethod
     def find_by_song_and_tag_ids(cls, song_id, tag_id):

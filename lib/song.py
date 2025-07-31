@@ -79,8 +79,13 @@ class Song:
         SongTag.add_new(self.id, tag_id)
 
     def get_tags(self):
-        pass
-        
+        from lib.tag import Tag
+        from lib.song_tag import SongTag
+
+        tag_list = []
+        rows = SongTag.find_by_song_id(self.id)
+        tag_list = [Tag.find_by_id(r.tag_id) for r in rows ]
+        return tag_list
     
     def update(self):
         CURSOR.execute("UPDATE songs SET title = ?, genre = ? WHERE id = ?",(self._title, self._genre, self.id,))

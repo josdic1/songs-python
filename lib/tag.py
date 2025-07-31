@@ -33,7 +33,7 @@ class Tag:
         CURSOR.execute("SELECT * FROM tags WHERE id = ?", (id,))
         row = CURSOR.fetchone()
         if row:
-            cls._from_db_row(row)
+            return cls._from_db_row(row)
         else:
             return None
         
