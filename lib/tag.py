@@ -21,6 +21,7 @@ class Tag:
         else:
             raise ValueError ("tag invalid")
     
+    
 
     @classmethod
     def _from_db_row(cls, row):
