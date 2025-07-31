@@ -17,4 +17,4 @@ CREATE TABLE song_tags (
     tag_id INTEGER,
     FOREIGN KEY (song_id) REFERENCES songs (id),
     FOREIGN KEY (tag_id) REFERENCES tags (id)
-)
+);
