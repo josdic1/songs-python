@@ -77,6 +77,7 @@ class Song:
     def add_tag(self, tag_id):
         from lib.song_tag import SongTag
         SongTag.add_new(self.id, tag_id)
+        
 
     def get_tags(self):
         from lib.tag import Tag
