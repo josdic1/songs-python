@@ -55,7 +55,7 @@ class Song:
         CURSOR.execute("SELECT * FROM songs WHERE title = ?", (title,))
         row = CURSOR.fetchone()
         if row:
-            cls._from_db_row(row)
+            return cls._from_db_row(row)
         else:
             return None
     
@@ -73,6 +73,12 @@ class Song:
         song = cls(title, genre)
         song.save()
         return song
+    
+    def add_tag(self, tag_id):
+        from lib.song_tag import SongTag
+        SongTag.add_new(self.id, tag_id)
+
+        
     
     def update(self):
         CURSOR.execute("UPDATE songs SET title = ?, genre = ? WHERE id = ?",(self._title, self._genre, self.id,))

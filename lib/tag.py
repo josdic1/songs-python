@@ -42,7 +42,7 @@ class Tag:
         CURSOR.execute("SELECT * FROM tags WHERE title = ?", (title,))
         row = CURSOR.fetchone()
         if row:
-            cls._from_db_row(row)
+            return cls._from_db_row(row)
         else:
             return None
     
