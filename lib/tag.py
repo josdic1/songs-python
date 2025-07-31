@@ -48,7 +48,7 @@ class Tag:
     
     @classmethod
     def get_all(cls):
-        CURSOR.execute("SELECT * FROM songs")
+        CURSOR.execute("SELECT * FROM tags")
         rows = CURSOR.fetchall()
         return [cls._from_db_row(row) for row in rows] if rows else []
     
